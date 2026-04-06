@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - FreshStore</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                FreshStore
+            </a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Shop</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <a href="cart.html" class="cart-icon" style="color: var(--primary-color);">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+                <button class="mobile-menu-btn" id="mobile-menu-btn">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cart Content -->
+    <section class="section" style="padding-top: 3rem;">
+        <div class="container">
+            <h2 class="section-title" style="text-align: left; margin-bottom: 2rem;">Shopping Cart</h2>
+            
+            <div class="cart-container">
+                <div class="cart-items" id="cart-items-container">
+                    <!-- Cart items injected here via cart.js -->
+                </div>
+                
+                <div class="cart-summary">
+                    <h3 style="margin-bottom: 1.5rem;">Order Summary</h3>
+                    
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span id="cart-subtotal">₹0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Delivery</span>
+                        <span id="cart-shipping">₹0.00</span>
+                    </div>
+                    
+                    <div class="summary-total">
+                        <span>Total (Tax incl.)</span>
+                        <span id="cart-total" style="color: var(--primary-color);">₹0.00</span>
+                    </div>
+                    
+                    <button class="btn btn-primary checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+                    <div style="text-align: center; margin-top: 1rem; font-size: 0.85rem; color: var(--text-light);">
+                        Free delivery on orders over ₹500
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Modal -->
+    <div id="payment-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 style="margin-bottom: 1rem; color: var(--primary-color);">Complete Your Payment</h2>
+            <p style="color: var(--text-light); margin-bottom: 1.5rem;">Scan the QR Code or pay directly to the number below.</p>
+            
+            <div class="payment-details">
+                <img id="qr-code-img" src="" alt="UPI QR Code" style="margin-bottom: 1rem; border-radius: 8px;">
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;" id="modal-amount">₹0.00</h3>
+                <p style="font-size: 1.1rem; font-weight: 500; margin-bottom: 1.5rem;">Phone / UPI: <strong>+91 9356615701</strong></p>
+            </div>
+
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <button class="btn btn-secondary" style="flex: 1; min-width: 120px;" onclick="closePaymentModal()">Cancel</button>
+                <button class="btn btn-primary" style="flex: 2; min-width: 200px; background-color: #25D366; border: none;" onclick="confirmPaymentAndSendOrder()">I have Paid - Send Order</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>FreshStore</h3>
+                    <p>Your premium neighborhood Kirana store, now online! Experience quality and freshness delivered to your door.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="cart.html">Cart</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 FreshStore Kirana. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/products.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>

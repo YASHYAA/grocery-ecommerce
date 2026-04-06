@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshStore - Premium Kirana</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                FreshStore
+            </a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="products.html">Shop</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <a href="cart.html" class="cart-icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+                <button class="mobile-menu-btn" id="mobile-menu-btn">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Fresh Groceries, Delivered Daily</h1>
+            <p>Get all your Daily Kirana Needs at the Best Prices with Premium Quality.</p>
+            <a href="products.html" class="btn btn-primary">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Categories / Features -->
+    <section class="section" style="background-color: var(--white);">
+        <div class="container">
+            <h2 class="section-title">Shop By Category</h2>
+            <div class="products-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                
+                <div class="product-card" style="text-align: center; padding: 2rem 1rem;">
+                    <h3 style="margin-bottom: 0.5rem; color: var(--primary-color);">Grains & Staples</h3>
+                    <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem;">Rice, Wheat, Flours & More</p>
+                    <a href="products.html?category=Grains & Staples" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">View All</a>
+                </div>
+                <div class="product-card" style="text-align: center; padding: 2rem 1rem;">
+                    <h3 style="margin-bottom: 0.5rem; color: var(--primary-color);">Pulses & Dals</h3>
+                    <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem;">Toor, Moong, Chana</p>
+                    <a href="products.html?category=Pulses" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">View All</a>
+                </div>
+                <div class="product-card" style="text-align: center; padding: 2rem 1rem;">
+                    <h3 style="margin-bottom: 0.5rem; color: var(--primary-color);">Spices</h3>
+                    <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem;">Pure & Authentic Masalas</p>
+                    <a href="products.html?category=Spices" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">View All</a>
+                </div>
+                <div class="product-card" style="text-align: center; padding: 2rem 1rem;">
+                    <h3 style="margin-bottom: 0.5rem; color: var(--primary-color);">Edible Oils</h3>
+                    <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem;">Healthy Cooking Oils & Ghee</p>
+                    <a href="products.html?category=Edible Oils" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">View All</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="products-grid" id="featured-products">
+                <!-- Products dynamically inserted via app.js/inline script -->
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="products.html" class="btn btn-primary">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>FreshStore</h3>
+                    <p>Your premium neighborhood Kirana store, now online! Experience quality and freshness delivered to your door.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="cart.html">Cart</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 FreshStore Kirana. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/products.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const featuredContainer = document.getElementById('featured-products');
+            
+            // Wait for DB products
+            await window.fetchProducts();
+
+            // Pick 4 items to show
+            const featured = window.productsData.slice(0, 4);
+            
+            if(featured.length === 0) {
+                featuredContainer.innerHTML = '<p style="text-align:center;width:100%;">No products found. Is DB running?</p>';
+                return;
+            }
+
+            featured.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="${product.image}" class="product-img" alt="${product.name}">
+                    <div class="product-info">
+                        <span class="product-category">${product.category}</span>
+                        <h3 class="product-title">${product.name}</h3>
+                        <div class="product-price">${formatPrice(product.price)}</div>
+                        <button class="btn btn-primary add-to-cart-btn" onclick="addToCart(${product.id})">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            Add to Cart
+                        </button>
+                    </div>
+                `;
+                featuredContainer.appendChild(card);
+            });
+        });
+    </script>
+</body>
+</html>
