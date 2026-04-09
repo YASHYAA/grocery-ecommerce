@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - FreshStore</title>
+    <title>Contact Us - Siddhi Kirana and General Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -19,7 +19,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                 </svg>
-                FreshStore
+                Siddhi Kirana and General Store
             </a>
             <ul class="nav-links" id="nav-links">
                 <li><a href="index.html">Home</a></li>
@@ -123,7 +123,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <h3>FreshStore</h3>
+                    <h3>Siddhi Kirana and General Store</h3>
                     <p>Your premium neighborhood Kirana store, now online! Experience quality and freshness delivered to
                         your door.</p>
                 </div>
@@ -145,7 +145,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                &copy; 2026 FreshStore Kirana. All rights reserved.
+                &copy; 2026 Siddhi Kirana and General Store. All rights reserved.
             </div>
         </div>
     </footer>
@@ -188,7 +188,7 @@
             if (!data) return;
 
             const body = `Name: ${data.name}%0D%0AEmail: ${data.email}%0D%0AMessage: ${data.message}`;
-            const subjectLine = `${data.subject || 'FreshStore Contact Inquiry'} - from ${data.name}`;
+            const subjectLine = `${data.subject || 'Siddhi Kirana and General Store Contact Inquiry'} - from ${data.name}`;
             const url = `mailto:yashwantkharage8@gmail.com?subject=${encodeURIComponent(subjectLine)}&body=${body}`;
             window.location.href = url;
             document.getElementById('contactForm').reset();

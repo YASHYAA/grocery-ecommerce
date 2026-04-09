@@ -126,15 +126,33 @@ window.checkout = function () {
   const shipping = subtotal > 0 ? (subtotal > 500 ? 0 : 50) : 0;
   finalOrderAmount = subtotal + shipping;
 
-  // Inject modal details
-  document.getElementById('modal-amount').textContent = `Total: ₹${finalOrderAmount.toFixed(2)}`;
-  
-  // Set QR Code
-  const upiUrl = `upi://pay?pa=9356615701@upi&pn=FreshStore&am=${finalOrderAmount.toFixed(2)}`;
-  document.getElementById('qr-code-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUrl)}`;
+  const payUpi = document.getElementById('pay-upi');
+  if (payUpi) payUpi.checked = true;
+  window.togglePaymentMethod();
 
   // Open overlay
   document.getElementById('payment-modal').classList.add('active');
+}
+
+window.togglePaymentMethod = function() {
+    const isCod = document.getElementById('pay-cod') && document.getElementById('pay-cod').checked;
+    const upiSection = document.getElementById('upi-details-section');
+    
+    let amountToDisplay = finalOrderAmount;
+    if (isCod) {
+        amountToDisplay += 20;
+        if (upiSection) upiSection.style.display = 'none';
+    } else {
+        if (upiSection) upiSection.style.display = 'block';
+    }
+    
+    document.getElementById('modal-amount').textContent = `Total: ₹${amountToDisplay.toFixed(2)}`;
+    
+    if (!isCod) {
+        const upiUrl = `upi://pay?pa=9356615701@upi&pn=SiddhiKirana&am=${amountToDisplay.toFixed(2)}`;
+        const qrCodeImg = document.getElementById('qr-code-img');
+        if(qrCodeImg) qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUrl)}`;
+    }
 }
 
 window.closePaymentModal = function() {
@@ -142,32 +160,62 @@ window.closePaymentModal = function() {
 }
 
 window.confirmPaymentAndSendOrder = async function() {
+    const address = document.getElementById('delivery-address').value.trim();
+    if (!address) {
+        alert("Please enter a delivery address.");
+        return;
+    }
+    
+    const isCod = document.getElementById('pay-cod') && document.getElementById('pay-cod').checked;
+    const computedTotal = finalOrderAmount + (isCod ? 20 : 0);
+
     // 1. Build WhatsApp Message
-    let orderText = `*New Order - FreshStore*\n\n`;
-    orderText += `*Customer Session/Email:* ${window.getSessionId()}\n`;
+    let orderText = `*New Order - Siddhi Kirana and General Store*\n\n`;
+    orderText += `*Customer Email/Session:* ${window.getSessionId()}\n`;
+    orderText += `*Delivery Address:* ${address}\n`;
+    orderText += `*Payment Method:* ${isCod ? 'Cash on Delivery (+₹20)' : 'UPI / Online'}\n`;
     orderText += `------------------------\n`;
     
+    let cartNotes = JSON.parse(localStorage.getItem('cartNotes') || '{}');
+
     window.cart.forEach(item => {
-        orderText += `▪ ${item.name}\n  ${item.quantity} x ₹${item.price.toFixed(2)} = ₹${(item.quantity * item.price).toFixed(2)}\n`;
+        let note = cartNotes[item.id] ? ` (Note: ${cartNotes[item.id]})` : "";
+        orderText += `▪ ${item.name}${note}\n  ${item.quantity} x ₹${Number(item.price).toFixed(2)} = ₹${(item.quantity * Number(item.price)).toFixed(2)}\n`;
     });
     
     orderText += `------------------------\n`;
-    orderText += `*Final Amount Paid:* ₹${finalOrderAmount.toFixed(2)}\n\n`;
-    orderText += `_Payment completed via website QR/Phone._`;
+    orderText += `*Final Amount:* ₹${computedTotal.toFixed(2)}\n\n`;
+    if(isCod) {
+        orderText += `_Please keep ₹${computedTotal.toFixed(2)} ready at delivery time._`;
+    } else {
+        orderText += `_Payment completed via website QR/Phone._`;
+    }
 
     // 1.5 Record Order in Database
+    let orderRecorded = false;
     try {
-        await fetch(`/api/orders`, {
+        const response = await fetch(`/api/orders`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 userEmail: window.getSessionId(),
+                address: address, // Send the collected delivery address to backend
                 items: window.cart.map(i => ({ id: i.id, name: i.name, quantity: i.quantity, price: i.price })), // strip huge details to save space
-                totalAmount: finalOrderAmount
+                totalAmount: computedTotal
             })
         });
+        if (response.ok) {
+            orderRecorded = true;
+        } else {
+            console.error("Backend error:", await response.text());
+        }
     } catch(err) {
         console.error("Failed to record order", err);
+    }
+
+    if (!orderRecorded) {
+        alert("Database Connection Failed! \n\nThe order could not be saved to the Admin Dashboard.\n\nIMPORTANT: Please ensure you are accessing the site via http://localhost:3000 in your browser, and NOT by opening the local HTML file (file:///). Ensure your Node server is running.");
+        return; // Stop here, do not open WhatsApp or clear cart!
     }
 
     // 2. Clear Database Cart
@@ -176,6 +224,7 @@ window.confirmPaymentAndSendOrder = async function() {
             method: 'DELETE'
         });
         if (response.ok) {
+            localStorage.removeItem('cartNotes');
             await window.initializeCart();
         }
     } catch(err) {
@@ -184,6 +233,10 @@ window.confirmPaymentAndSendOrder = async function() {
 
     // 3. Close modal & Shift to WhatsApp
     closePaymentModal();
+    
+    // Show explicit success popup
+    alert("Order placed successfully! \n\nClick OK to be redirected to WhatsApp to send your order details to the store.");
+    
     const whatsappUrl = `https://wa.me/919356615701?text=${encodeURIComponent(orderText)}`;
-    window.open(whatsappUrl, '_blank');
+    window.location.href = whatsappUrl; // Replaces current tab to avoid browser popup blockers
 }

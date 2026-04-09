@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Cart - FreshStore</title>
+    <title>Your Cart - Siddhi Kirana and General Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -14,7 +14,7 @@
         <div class="container">
             <a href="index.html" class="logo">
                 <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-                FreshStore
+                Siddhi Kirana and General Store
             </a>
             <ul class="nav-links" id="nav-links">
                 <li><a href="index.html">Home</a></li>
@@ -76,10 +76,24 @@
             <h2 style="margin-bottom: 1rem; color: var(--primary-color);">Complete Your Payment</h2>
             <p style="color: var(--text-light); margin-bottom: 1.5rem;">Scan the QR Code or pay directly to the number below.</p>
             
-            <div class="payment-details">
+            <div style="margin-bottom: 1.5rem; text-align: left;">
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Payment Method:</label>
+                <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                    <label style="cursor: pointer;"><input type="radio" name="payment-method" id="pay-upi" value="upi" checked onchange="togglePaymentMethod()"> UPI / Online</label>
+                    <label style="cursor: pointer;"><input type="radio" name="payment-method" id="pay-cod" value="cod" onchange="togglePaymentMethod()"> Cash on Delivery (+₹20)</label>
+                </div>
+            </div>
+
+            <div class="payment-details" id="upi-details-section">
                 <img id="qr-code-img" src="" alt="UPI QR Code" style="margin-bottom: 1rem; border-radius: 8px;">
-                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;" id="modal-amount">₹0.00</h3>
                 <p style="font-size: 1.1rem; font-weight: 500; margin-bottom: 1.5rem;">Phone / UPI: <strong>+91 9356615701</strong></p>
+            </div>
+            
+            <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;" id="modal-amount">₹0.00</h3>
+            
+            <div style="margin-bottom: 1.5rem; text-align: left;">
+                <label for="delivery-address" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Delivery Address (Required):</label>
+                <textarea id="delivery-address" rows="3" placeholder="Enter your full delivery address..." style="width: 100%; padding: 0.8rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;"></textarea>
             </div>
 
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
@@ -94,7 +108,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <h3>FreshStore</h3>
+                    <h3>Siddhi Kirana and General Store</h3>
                     <p>Your premium neighborhood Kirana store, now online! Experience quality and freshness delivered to your door.</p>
                 </div>
                 <div class="footer-links">
@@ -115,14 +129,14 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                &copy; 2026 FreshStore Kirana. All rights reserved.
+                &copy; 2026 Siddhi Kirana and General Store. All rights reserved.
             </div>
         </div>
     </footer>
 
     <!-- Scripts -->
-    <script src="js/products.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/cart.js"></script>
+    <script src="js/products.js?v=1.4"></script>
+    <script src="js/app.js?v=1.4"></script>
+    <script src="js/cart.js?v=1.4"></script>
 </body>
 </html>

@@ -1,19 +1,19 @@
 /* css/style.css */
 :root {
-  --primary-color: #2e7d32; /* Fresh Green */
-  --primary-dark: #1b5e20;
-  --secondary-color: #ff9800; /* Warm Orange */
+  --primary-color: #10b981; /* Premium Emerald */
+  --primary-dark: #059669;
+  --secondary-color: #f59e0b; /* Amber */
   --accent-color: #fbc02d;
-  --text-dark: #333333;
-  --text-light: #666666;
-  --bg-color: #f4f6f8;
+  --text-dark: #1f2937;
+  --text-light: #6b7280;
+  --bg-color: #f9fafb;
   --white: #ffffff;
-  --danger: #d32f2f;
-  --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
-  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
-  --border-radius: 8px;
-  --transition: all 0.3s ease;
+  --danger: #ef4444;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
+  --shadow-lg: 0 16px 32px rgba(0,0,0,0.12);
+  --border-radius: 12px;
+  --transition: all 0.3s ease-in-out;
 }
 
 * {
@@ -138,6 +138,8 @@ img {
 
 .btn-primary:hover {
   background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
 
 .btn-secondary {
@@ -160,7 +162,7 @@ img {
 
 /* Hero Section */
 .hero {
-  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1200') center/cover;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.85), rgba(5, 150, 105, 0.9)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1200') center/cover;
   height: 60vh;
   display: flex;
   align-items: center;
@@ -200,8 +202,9 @@ img {
 /* Product Card */
 .product-card {
   background-color: var(--white);
-  border-radius: var(--border-radius);
+  border-radius: 16px;
   box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0,0,0,0.05);
   overflow: hidden;
   transition: var(--transition);
   display: flex;
@@ -209,7 +212,7 @@ img {
 }
 
 .product-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
   box-shadow: var(--shadow-lg);
 }
 
@@ -318,6 +321,7 @@ img {
   background-color: var(--primary-color);
   color: var(--white);
   border-color: var(--primary-color);
+  transform: scale(1.05);
 }
 
 /* Cart Page */
@@ -567,6 +571,8 @@ img {
   border-radius: var(--border-radius);
   max-width: 450px;
   width: 100%;
+  max-height: 90vh; /* Prevents modal from growing taller than the screen */
+  overflow-y: auto; /* Allows scrolling inside the modal */
   text-align: center;
   box-shadow: var(--shadow-lg);
   animation: modalFadeIn 0.3s ease-out;
@@ -578,6 +584,12 @@ img {
   border-radius: var(--border-radius);
   margin-bottom: 1.5rem;
   border: 1px solid #eee;
+}
+
+#qr-code-img {
+  max-width: 180px; /* Reduce QR code size */
+  max-height: 180px;
+  height: auto;
 }
 
 @keyframes modalFadeIn {

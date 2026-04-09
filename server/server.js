@@ -182,15 +182,15 @@ app.post('/api/auth/admin', (req, res) => {
 
 // Create Order (Called from Frontend Checkout)
 app.post('/api/orders', async (req, res) => {
-  const { userEmail, items, totalAmount } = req.body;
+  const { userEmail, address, items, totalAmount } = req.body;
   if (!userEmail || !items || totalAmount === undefined) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
   try {
     const result = await pool.query(
-      'INSERT INTO orders (user_email, items, total_amount, status) VALUES ($1, $2, $3, $4) RETURNING id',
-      [userEmail, JSON.stringify(items), totalAmount, 'Pending']
+      'INSERT INTO orders (user_email, address, items, total_amount, status) VALUES ($1, $2, $3, $4, $5) RETURNING id',
+      [userEmail, address || '', JSON.stringify(items), totalAmount, 'Pending']
     );
     res.json({ success: true, orderId: result.rows[0].id });
   } catch (err) {
@@ -202,8 +202,14 @@ app.post('/api/orders', async (req, res) => {
 // Get All Orders (Admin Dashboard)
 app.get('/api/admin/orders', async (req, res) => {
   try {
-    // Return newest orders first
-    const result = await pool.query('SELECT * FROM orders ORDER BY order_date DESC');
+    // Return newest orders first with user details joined
+    const query = `
+      SELECT o.*, u.name as customer_name, u.contact as customer_contact 
+      FROM orders o 
+      LEFT JOIN users u ON o.user_email = u.email 
+      ORDER BY o.order_date DESC
+    `;
+    const result = await pool.query(query);
     res.json(result.rows);
   } catch (err) {
     console.error(err);
@@ -224,6 +230,17 @@ app.put('/api/admin/orders/:id/status', async (req, res) => {
   }
 });
 
+// Delete Order
+app.delete('/api/admin/orders/:id', async (req, res) => {
+  try {
+    await pool.query('DELETE FROM orders WHERE id = $1', [req.params.id]);
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Database error deleting order' });
+  }
+});
+
 // --- PRODUCT APIS ---
 app.get('/api/products', async (req, res) => {
   try {
@@ -236,7 +253,16 @@ app.get('/api/products', async (req, res) => {
 });
 
 app.post('/api/admin/products', async (req, res) => {
-  const { name, price, category, image } = req.body;
+  let { name, price, category, image } = req.body;
+  
+  // Intercept Google Drive file urls and convert to direct image links
+  if (image && image.includes('drive.google.com/file/d/')) {
+      const match = image.match(/\/d\/(.*?)\//);
+      if (match && match[1]) {
+          image = `https://drive.google.com/uc?export=view&id=${match[1]}`;
+      }
+  }
+  
   try {
     await pool.query(
       'INSERT INTO products (name, price, category, image) VALUES ($1, $2, $3, $4)',
@@ -257,6 +283,23 @@ app.delete('/api/admin/products/:id', async (req, res) => {
     console.error(err);
     res.status(500).json({ error: 'Failed to delete product' });
   }
+});
+
+// --- SETTINGS API ---
+let storeSettings = {
+    promoMessage: '',
+    promoActive: false
+};
+
+app.get('/api/settings', (req, res) => {
+    res.json(storeSettings);
+});
+
+app.post('/api/admin/settings', (req, res) => {
+    const { promoMessage, promoActive } = req.body;
+    if (promoMessage !== undefined) storeSettings.promoMessage = promoMessage;
+    if (promoActive !== undefined) storeSettings.promoActive = promoActive;
+    res.json({ success: true, settings: storeSettings });
 });
 
 app.listen(port, () => {

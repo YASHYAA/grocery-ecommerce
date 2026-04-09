@@ -170,7 +170,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                 </svg>
-                FreshStore
+                Siddhi Kirana and General Store
             </a>
             <ul class="nav-links" id="nav-links">
                 <li><a href="index.html">Home</a></li>
@@ -200,7 +200,7 @@
     <!-- Auth Section -->
     <section class="auth-section">
         <div class="auth-image-side">
-            <h1>FreshStore</h1>
+            <h1>Siddhi Kirana and General Store</h1>
             <p>Your premium neighborhood Kirana store, delivering freshness directly to your door.</p>
         </div>
         <div class="auth-form-side">
@@ -222,7 +222,12 @@
 
                         <div class="form-group">
                             <label for="login-password">Password</label>
-                            <input type="password" id="login-password" required placeholder="••••••••">
+                            <div style="position: relative;">
+                                <input type="password" id="login-password" required placeholder="••••••••" style="padding-right: 40px; width: 100%; box-sizing: border-box;">
+                                <span onclick="togglePassword('login-password')" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--text-light); display: flex; align-items: center;">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                </span>
+                            </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary auth-btn">Sign In</button>
@@ -258,7 +263,12 @@
 
                         <div class="form-group">
                             <label for="reg-password">Password</label>
-                            <input type="password" id="reg-password" required placeholder="••••••••" minlength="6">
+                            <div style="position: relative;">
+                                <input type="password" id="reg-password" required placeholder="••••••••" minlength="6" style="padding-right: 40px; width: 100%; box-sizing: border-box;">
+                                <span onclick="togglePassword('reg-password')" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--text-light); display: flex; align-items: center;">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                </span>
+                            </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary auth-btn">Sign Up</button>
@@ -273,7 +283,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <h3>FreshStore</h3>
+                    <h3>Siddhi Kirana and General Store</h3>
                     <p>Your premium neighborhood Kirana store, now online! Experience quality and freshness delivered to
                         your door.</p>
                 </div>
@@ -287,14 +297,14 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                &copy; 2026 FreshStore Kirana. All rights reserved.
+                &copy; 2026 Siddhi Kirana and General Store. All rights reserved.
             </div>
         </div>
     </footer>
 
     <!-- Scripts -->
-    <script src="js/products.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/products.js?v=1.1"></script>
+    <script src="js/app.js?v=1.1"></script>
     <script>
         function switchTab(tab) {
             // Update tabs
@@ -304,6 +314,15 @@
             // Update forms
             document.getElementById('form-login').classList.toggle('active', tab === 'login');
             document.getElementById('form-register').classList.toggle('active', tab === 'register');
+        }
+
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+            } else {
+                input.type = 'password';
+            }
         }
 
         async function handleAuth(e, type) {

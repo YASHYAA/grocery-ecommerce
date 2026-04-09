@@ -17,7 +17,11 @@ window.fetchProducts = async function() {
 
 function getCategories() {
   const categories = window.productsData.map(p => p.category);
-  return ["All", ...new Set(categories)]; // Unique categories
+  const uniqueCats = ["All", ...new Set(categories)]; // Unique categories
+  if (!uniqueCats.includes("Other")) {
+      uniqueCats.push("Other");
+  }
+  return uniqueCats;
 }
 
 function getProductById(id) {
