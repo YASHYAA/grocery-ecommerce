@@ -149,9 +149,9 @@ window.togglePaymentMethod = function() {
     document.getElementById('modal-amount').textContent = `Total: ₹${amountToDisplay.toFixed(2)}`;
     
     if (!isCod) {
-        const upiUrl = `upi://pay?pa=9356615701@upi&pn=SiddhiKirana&am=${amountToDisplay.toFixed(2)}`;
-        const qrCodeImg = document.getElementById('qr-code-img');
-        if(qrCodeImg) qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUrl)}`;
+        // const upiUrl = `upi://pay?pa=9356615701@upi&pn=SiddhiKirana&am=${amountToDisplay.toFixed(2)}`;
+        // const qrCodeImg = document.getElementById('qr-code-img');
+        // if(qrCodeImg) qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUrl)}`;
     }
 }
 

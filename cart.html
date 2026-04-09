@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
     <!-- Navbar -->
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo">
-                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                </svg>
                 Siddhi Kirana and General Store
             </a>
             <ul class="nav-links" id="nav-links">
@@ -24,11 +29,18 @@
             </ul>
             <div style="display: flex; gap: 1rem; align-items: center;">
                 <a href="cart.html" class="cart-icon" style="color: var(--primary-color);">
-                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                        </path>
+                    </svg>
                     <span class="cart-count" id="cart-count">0</span>
                 </a>
                 <button class="mobile-menu-btn" id="mobile-menu-btn">
-                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
                 </button>
             </div>
         </div>
@@ -38,15 +50,15 @@
     <section class="section" style="padding-top: 3rem;">
         <div class="container">
             <h2 class="section-title" style="text-align: left; margin-bottom: 2rem;">Shopping Cart</h2>
-            
+
             <div class="cart-container">
                 <div class="cart-items" id="cart-items-container">
                     <!-- Cart items injected here via cart.js -->
                 </div>
-                
+
                 <div class="cart-summary">
                     <h3 style="margin-bottom: 1.5rem;">Order Summary</h3>
-                    
+
                     <div class="summary-row">
                         <span>Subtotal</span>
                         <span id="cart-subtotal">₹0.00</span>
@@ -55,12 +67,12 @@
                         <span>Delivery</span>
                         <span id="cart-shipping">₹0.00</span>
                     </div>
-                    
+
                     <div class="summary-total">
                         <span>Total (Tax incl.)</span>
                         <span id="cart-total" style="color: var(--primary-color);">₹0.00</span>
                     </div>
-                    
+
                     <button class="btn btn-primary checkout-btn" onclick="checkout()">Proceed to Checkout</button>
                     <div style="text-align: center; margin-top: 1rem; font-size: 0.85rem; color: var(--text-light);">
                         Free delivery on orders over ₹500
@@ -74,31 +86,44 @@
     <div id="payment-modal" class="modal-overlay">
         <div class="modal-content">
             <h2 style="margin-bottom: 1rem; color: var(--primary-color);">Complete Your Payment</h2>
-            <p style="color: var(--text-light); margin-bottom: 1.5rem;">Scan the QR Code or pay directly to the number below.</p>
-            
+            <p style="color: var(--text-light); margin-bottom: 1.5rem;">Scan the QR Code or pay directly to the number
+                below.</p>
+
             <div style="margin-bottom: 1.5rem; text-align: left;">
                 <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Payment Method:</label>
                 <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-                    <label style="cursor: pointer;"><input type="radio" name="payment-method" id="pay-upi" value="upi" checked onchange="togglePaymentMethod()"> UPI / Online</label>
-                    <label style="cursor: pointer;"><input type="radio" name="payment-method" id="pay-cod" value="cod" onchange="togglePaymentMethod()"> Cash on Delivery (+₹20)</label>
+                    <label style="cursor: pointer;"><input type="radio" name="payment-method" id="pay-upi" value="upi"
+                            checked onchange="togglePaymentMethod()"> UPI / Online</label>
+                    <label style="cursor: pointer;"><input type="radio" name="payment-method" id="pay-cod" value="cod"
+                            onchange="togglePaymentMethod()"> Cash on Delivery (+₹20)</label>
                 </div>
             </div>
 
-            <div class="payment-details" id="upi-details-section">
-                <img id="qr-code-img" src="" alt="UPI QR Code" style="margin-bottom: 1rem; border-radius: 8px;">
-                <p style="font-size: 1.1rem; font-weight: 500; margin-bottom: 1.5rem;">Phone / UPI: <strong>+91 9356615701</strong></p>
+            <div class="payment-details" id="upi-details-section" style="text-align: center;">
+                <img id="qr-code-img" src="images/qr.png" alt="UPI QR Code"
+                    style="max-width: 250px; margin-bottom: 1rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                <p style="font-size: 1.1rem; font-weight: 500; margin-bottom: 0.5rem;">UPI ID:
+                    <strong>yashwantkharage8-1@oksbi</strong>
+                </p>
+                <p style="font-size: 1.1rem; font-weight: 500; margin-bottom: 1.5rem;">Phone: <strong>+91
+                        9356615701</strong></p>
             </div>
-            
+
             <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;" id="modal-amount">₹0.00</h3>
-            
+
             <div style="margin-bottom: 1.5rem; text-align: left;">
-                <label for="delivery-address" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Delivery Address (Required):</label>
-                <textarea id="delivery-address" rows="3" placeholder="Enter your full delivery address..." style="width: 100%; padding: 0.8rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;"></textarea>
+                <label for="delivery-address" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Delivery
+                    Address (Required):</label>
+                <textarea id="delivery-address" rows="3" placeholder="Enter your full delivery address..."
+                    style="width: 100%; padding: 0.8rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;"></textarea>
             </div>
 
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <button class="btn btn-secondary" style="flex: 1; min-width: 120px;" onclick="closePaymentModal()">Cancel</button>
-                <button class="btn btn-primary" style="flex: 2; min-width: 200px; background-color: #25D366; border: none;" onclick="confirmPaymentAndSendOrder()">I have Paid - Send Order</button>
+                <button class="btn btn-secondary" style="flex: 1; min-width: 120px;"
+                    onclick="closePaymentModal()">Cancel</button>
+                <button class="btn btn-primary"
+                    style="flex: 2; min-width: 200px; background-color: #25D366; border: none;"
+                    onclick="confirmPaymentAndSendOrder()">I have Paid - Send Order</button>
             </div>
         </div>
     </div>
@@ -109,7 +134,8 @@
             <div class="footer-grid">
                 <div>
                     <h3>Siddhi Kirana and General Store</h3>
-                    <p>Your premium neighborhood Kirana store, now online! Experience quality and freshness delivered to your door.</p>
+                    <p>Your premium neighborhood Kirana store, now online! Experience quality and freshness delivered to
+                        your door.</p>
                 </div>
                 <div class="footer-links">
                     <h3>Quick Links</h3>
@@ -139,4 +165,5 @@
     <script src="js/app.js?v=1.4"></script>
     <script src="js/cart.js?v=1.4"></script>
 </body>
+
 </html>
