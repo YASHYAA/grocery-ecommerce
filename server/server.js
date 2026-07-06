@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -27,12 +28,26 @@ const poolConfig = process.env.DATABASE_URL ? {
 };
 const pool = new Pool(poolConfig);
 
-pool.connect((err, client, release) => {
+pool.connect(async (err, client, release) => {
   if (err) {
     return console.error('Error acquiring client', err.stack)
   }
   console.log('Successfully connected to PostgreSQL!');
-  release();
+  
+  try {
+    const initSqlPath = path.join(__dirname, 'init.sql');
+    if (fs.existsSync(initSqlPath)) {
+      const sql = fs.readFileSync(initSqlPath, 'utf8');
+      await client.query(sql);
+      console.log('Database initialized successfully with schema and seed data!');
+    } else {
+      console.warn('init.sql not found, skipping DB initialization.');
+    }
+  } catch (dbErr) {
+    console.error('Error initializing database:', dbErr);
+  } finally {
+    release();
+  }
 });
 
 // GET /api/cart/:sessionId
